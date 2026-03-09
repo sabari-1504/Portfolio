@@ -1,0 +1,201 @@
+.nav-bar {
+  background: #161B22;
+  width: 60px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+
+  /* Make the sidebar a vertical flex container so items can be spaced from top to bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  .logo {
+    display: block;
+    padding: 8px 0;
+
+    img {
+      display: block;
+      margin: 8px auto;
+      width: 24px;
+      height: auto;
+
+      &.sub-logo {
+        width: 50px;
+      }
+    }
+  }
+
+  nav {
+    /* Bring nav to the top and spread items across available space */
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    flex: 1;
+    padding-top: 8px;
+
+    a {
+      font-size: 22px;
+      color: #8B949E;
+      display: block;
+      line-height: 44px;
+      height: 44px;
+      position: relative;
+      text-decoration: none;
+
+      i {
+        transition: all 0.3s ease-out;
+      }
+
+      &:hover {
+        color: #00CED1;
+
+        svg {
+          opacity: 0;
+        }
+
+        &:after {
+          opacity: 1;
+        }
+      }
+
+      &:after {
+        content: '';
+        font-size: 9px;
+        letter-spacing: 2px;
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+        opacity: 0;
+        -webkit-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+      }
+
+      &:first-child {
+        &:after {
+          content: 'HOME';
+        }
+      }
+    }
+
+    a.about-link {
+      &:after {
+        content: 'ABOUT';
+      }
+    }
+
+    a.contact-link {
+      &:after {
+        content: 'CONTACT';
+      }
+    }
+
+    a.skills-link {
+      &:after {
+        content: 'SKILLS';
+      }
+    }
+
+    a.achievements-link {
+      &:after {
+        content: 'ACHIEVEMENTS';
+      }
+    }
+
+    a.active {
+      svg {
+        color: #00CED1;
+      }
+    }
+  }
+
+  ul {
+    /* Move social links into flex flow and keep them toward the bottom */
+    position: static;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 0 0 12px 0;
+    list-style: none;
+    text-align: center;
+    margin: 0;
+
+    li {
+      a {
+        padding: 7px 0;
+        display: block;
+        font-size: 15px;
+        line-height: 16px;
+        color: #8B949E;
+
+        &:hover {
+          color: #00CED1;
+        }
+      }
+    }
+  }
+}
+
+/* Mobile: turn sidebar into a top bar */
+@media screen and (max-width: 768px) {
+  .nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 8px;
+  }
+
+  .nav-bar .logo {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-bar nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    gap: 16px;
+    padding-top: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .nav-bar nav a {
+    line-height: 40px;
+    height: 40px;
+    font-size: 20px;
+    padding: 0 4px;
+  }
+
+  .nav-bar ul {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    height: 56px;
+  }
+}
+
+.random {
+  color: #b9b9b9;
+}
