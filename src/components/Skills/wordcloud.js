@@ -58,13 +58,13 @@ const WordCloud = () => {
     if (!containerRef.current) return
     const instance = TagCloud(containerRef.current, texts, options)
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       if (containerRef.current) {
         containerRef.current.innerHTML = ''
       }
       // instance has no documented destroy API; clearing innerHTML removes nodes
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
