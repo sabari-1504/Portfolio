@@ -54,8 +54,7 @@ const WordCloud = () => {
     keep: true,
   }
   // Initialize TagCloud once and clean up on unmount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
+  // eslint-disable react-hooks/exhaustive-deps  useEffect(() => {
     if (!containerRef.current) return
     const instance = TagCloud(containerRef.current, texts, options)
 
@@ -66,6 +65,7 @@ const WordCloud = () => {
       // instance has no documented destroy API; clearing innerHTML removes nodes
     }
   }, [])
+  // eslint-enable react-hooks/exhaustive-deps
 
   return (
     <div className="main">
