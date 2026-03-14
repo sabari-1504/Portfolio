@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 
 import TagCloud from 'TagCloud'
 
 const WordCloud = () => {
   const containerRef = useRef(null)
-  const texts = [
+  const texts = useMemo(() => [
     'Unity',
     'VR',
     'AR',
@@ -37,10 +37,10 @@ const WordCloud = () => {
     'Prompt Engineering',
     'MetaQuest',
     'Git',
-  ]
+  ], [])
   // Responsive radius based on viewport width
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
-  const options = {
+  const options = useMemo(() => ({
     radius: isMobile ? 120 : 300,
     // animation speed
     // slow, normal, fast
@@ -52,20 +52,20 @@ const WordCloud = () => {
     direction: 135,
     // interact with cursor move on mouse out
     keep: true,
-  }
+  }), [isMobile])
   // Initialize TagCloud once and clean up on unmount
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (!containerRef.current) return
-    const instance = TagCloud(containerRef.current, texts, options)
+    const container = containerRef.current
+    if (!container) return
+    const instance = TagCloud(container, texts, options)
 
     return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = ''
+      if (container) {
+        container.innerHTML = ''
       }
       // instance has no documented destroy API; clearing innerHTML removes nodes
     }
-  }, [])
+  }, [texts, options])
 
   return (
     <div className="main">
