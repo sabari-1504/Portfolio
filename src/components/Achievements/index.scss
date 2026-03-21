@@ -1,3 +1,7 @@
+/* =========================================================
+   Achievements Page – Bootstrap grid + mobile-first
+   ========================================================= */
+
 .achievements-page {
   .achievements-container {
     position: absolute;
@@ -8,10 +12,8 @@
     max-height: 80%;
     overflow-y: auto;
     padding: 20px;
-    
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
+
+    &::-webkit-scrollbar { width: 4px; }
     &::-webkit-scrollbar-thumb {
       background: #00CED1;
       border-radius: 10px;
@@ -42,6 +44,7 @@
     .achievement-icon {
       font-size: 24px;
       color: #00CED1;
+      flex-shrink: 0;
     }
 
     .achievement-content {
@@ -52,12 +55,14 @@
         font-weight: 400;
         font-size: 22px;
       }
+
       p {
         color: #E6EDF3;
         margin: 0 0 8px 0;
         font-size: 15px;
         line-height: 1.4;
       }
+
       .date {
         color: #8B949E;
         font-size: 12px;
@@ -67,8 +72,13 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+/* ── Tablet & Phone  (≤ 991px — Bootstrap lg) ────────────── */
+@media screen and (max-width: 991px) {
   .achievements-page {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+
     .achievements-container {
       position: relative;
       width: 100%;
@@ -78,13 +88,48 @@
       height: auto;
       max-height: none;
       overflow: visible;
-      padding: 0 16px 40px 16px;
+      /* Bootstrap px-3 */
+      padding: 0 12px 32px 12px;
     }
-    
+
     .achievement-item {
-        &:hover {
-            transform: none;
-        }
+      /* No translate on mobile – Bootstrap touch-friendly */
+      &:hover {
+        transform: none;
+        box-shadow: 0 0 16px rgba(0, 206, 209, 0.15);
+      }
+    }
+  }
+
+  .achievements-page .text-zone {
+    position: relative;
+    width: 100%;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin-bottom: 8px;
+  }
+}
+
+/* ── Small phones (≤ 576px) ─────────────────────────────── */
+@media screen and (max-width: 576px) {
+  .achievements-page {
+    .achievement-item {
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px;
+
+      .achievement-content h3 {
+        font-size: 18px;
+      }
+
+      .achievement-content p {
+        font-size: 14px;
+      }
+    }
+
+    .achievements-container {
+      padding: 0 8px 24px 8px;
     }
   }
 }

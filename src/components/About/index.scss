@@ -1,3 +1,8 @@
+/* =========================================================
+   About Page – Bootstrap grid + mobile-first
+   ========================================================= */
+
+/* ── Desktop: spinning cube on the right ─────────────────── */
 .stage-cube-cont {
   width: 50%;
   height: 100%;
@@ -32,50 +37,90 @@
     box-shadow: 0 0 20px 0px lightyellow;
   }
 
-  .face1 {
-    transform: translateZ(100px);
-    color: #dd0031;
-  }
-  .face2 {
-    transform: rotateY(90deg) translateZ(100px);
-    color: #f06529;
-  }
-  .face3 {
-    transform: rotateY(90deg) rotateX(90deg) translateZ(100px);
-    color: #28a4d9;
-  }
-  .face4 {
-    transform: rotateY(180deg) rotateZ(90deg) translateZ(100px);
-    color: #5ed4f4;
-  }
-  .face5 {
-    transform: rotateY(-90deg) rotateZ(90deg) translateZ(100px);
-    color: #efd81d;
-  }
-  .face6 {
-    transform: rotateX(-90deg) translateZ(100px);
-    color: #ec4d28;
-  }
+  .face1 { transform: translateZ(100px);                           color: #dd0031; }
+  .face2 { transform: rotateY(90deg) translateZ(100px);           color: #f06529; }
+  .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(100px); color: #28a4d9; }
+  .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(100px); color: #5ed4f4; }
+  .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(100px); color: #efd81d; }
+  .face6 { transform: rotateX(-90deg) translateZ(100px);          color: #ec4d28; }
 }
 
 @keyframes spincube {
-  from,
-  to {
-    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  from, to { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  16%  { transform: rotateY(-90deg); }
+  33%  { transform: rotateY(-90deg) rotateZ(90deg); }
+  50%  { transform: rotateY(-180deg) rotateZ(90deg); }
+  66%  { transform: rotateY(-270deg) rotateX(90deg); }
+  83%  { transform: rotateX(90deg); }
+}
+
+/* ── Tablet & Phone  (≤ 991px) ──────────────────────────── */
+@media screen and (max-width: 991px) {
+  .about-page {
+    /* Bootstrap-style: single-column column layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
   }
-  16% {
-    transform: rotateY(-90deg);
+
+  .stage-cube-cont {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-top: 0;
+    /* Bootstrap-style centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 32px 0;
+    /* Fixed height so cube is visible */
+    min-height: 250px;
+    overflow: visible;
   }
-  33% {
-    transform: rotateY(-90deg) rotateZ(90deg);
+
+  .cubespinner {
+    /* Scale down for tablet */
+    transform-origin: 80px 80px 0;
+    margin-left: 0;
+    position: relative;
+
+    div {
+      width: 160px;
+      height: 160px;
+      font-size: 80px;
+    }
+
+    .face1 { transform: translateZ(80px); }
+    .face2 { transform: rotateY(90deg) translateZ(80px); }
+    .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(80px); }
+    .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(80px); }
+    .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(80px); }
+    .face6 { transform: rotateX(-90deg) translateZ(80px); }
   }
-  50% {
-    transform: rotateY(-180deg) rotateZ(90deg);
+}
+
+/* ── Small phones (≤ 576px) ─────────────────────────────── */
+@media screen and (max-width: 576px) {
+  .stage-cube-cont {
+    min-height: 160px;
+    margin: 12px 0 24px 0;
   }
-  66% {
-    transform: rotateY(-270deg) rotateX(90deg);
-  }
-  83% {
-    transform: rotateX(90deg);
+
+  .cubespinner {
+    transform-origin: 60px 60px 0;
+
+    div {
+      width: 120px;
+      height: 120px;
+      font-size: 60px;
+    }
+
+    .face1 { transform: translateZ(60px); }
+    .face2 { transform: rotateY(90deg) translateZ(60px); }
+    .face3 { transform: rotateY(90deg) rotateX(90deg) translateZ(60px); }
+    .face4 { transform: rotateY(180deg) rotateZ(90deg) translateZ(60px); }
+    .face5 { transform: rotateY(-90deg) rotateZ(90deg) translateZ(60px); }
+    .face6 { transform: rotateX(-90deg) translateZ(60px); }
   }
 }

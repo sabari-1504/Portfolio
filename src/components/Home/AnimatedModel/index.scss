@@ -1,3 +1,7 @@
+/* =========================================================
+   AnimatedModel (3D Robot) – Bootstrap-responsive
+   ========================================================= */
+
 .animated-model-container {
   position: absolute;
   right: 15%;
@@ -8,18 +12,16 @@
   z-index: 1;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 0 60px rgba(0, 206, 209, 0.3),
     0 0 100px rgba(0, 206, 209, 0.2),
     inset 0 0 60px rgba(0, 206, 209, 0.1);
-  
+
   &::before {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+    top: -2px; left: -2px;
+    right: -2px; bottom: -2px;
     border-radius: 50%;
     background: linear-gradient(45deg, transparent, rgba(0, 206, 209, 0.3), transparent);
     z-index: -1;
@@ -34,14 +36,11 @@
 }
 
 @keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
+/* ── Large tablets (≤ 1200px) ──────────────────────────── */
 @media screen and (max-width: 1200px) {
   .animated-model-container {
     width: 300px;
@@ -50,15 +49,26 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+/* ── Tablet & Phone  (≤ 991px — Bootstrap lg) ─────────── */
+@media screen and (max-width: 991px) {
   .animated-model-container {
+    /* Becomes a centered block in normal flow, Bootstrap-style */
     position: relative;
     right: auto;
     top: auto;
     transform: none;
     display: block;
-    width: 260px;
-    height: 260px;
-    margin: 16px auto 0 auto;
+    width: 280px;
+    height: 280px;
+    margin: 20px auto 24px auto;
+  }
+}
+
+/* ── Small phones (≤ 576px) ────────────────────────────── */
+@media screen and (max-width: 576px) {
+  .animated-model-container {
+    width: 220px;
+    height: 220px;
+    margin: 16px auto 20px auto;
   }
 }

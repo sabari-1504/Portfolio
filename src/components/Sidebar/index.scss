@@ -1,12 +1,18 @@
-.nav-bar {
+/* =========================================================
+   Sidebar – desktop left-rail + dedicated mobile top-bar
+   ========================================================= */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DESKTOP SIDEBAR  (≥ 992px)
+   Shows as a 60px vertical rail on the left
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.nav-bar.desktop-sidebar {
   background: #161B22;
   width: 60px;
   height: 100%;
   position: absolute;
   top: 0;
   z-index: 3;
-
-  /* Make the sidebar a vertical flex container so items can be spaced from top to bottom */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,14 +28,11 @@
       width: 24px;
       height: auto;
 
-      &.sub-logo {
-        width: 50px;
-      }
+      &.sub-logo { width: 50px; }
     }
   }
 
   nav {
-    /* Bring nav to the top and spread items across available space */
     position: static;
     display: flex;
     flex-direction: column;
@@ -43,27 +46,23 @@
 
     a {
       font-size: 22px;
-      color: #8B949E;
       display: block;
       line-height: 44px;
       height: 44px;
       position: relative;
       text-decoration: none;
+      i { transition: all 0.3s ease-out; }
 
-      i {
-        transition: all 0.3s ease-out;
+      .nav-icon {
+        color: #8B949E;
+        transition: color 0.3s ease-out;
       }
 
       &:hover {
         color: #00CED1;
-
-        svg {
-          opacity: 0;
-        }
-
-        &:after {
-          opacity: 1;
-        }
+        .nav-icon { color: #00CED1; }
+        svg { opacity: 0; }
+        &:after { opacity: 1; }
       }
 
       &:after {
@@ -76,50 +75,24 @@
         width: 100%;
         text-align: center;
         opacity: 0;
-        -webkit-transition: all 0.3s ease-out;
         transition: all 0.3s ease-out;
       }
 
-      &:first-child {
-        &:after {
-          content: 'HOME';
-        }
-      }
+      &:first-child:after { content: 'HOME'; }
     }
 
-    a.about-link {
-      &:after {
-        content: 'ABOUT';
-      }
-    }
+    a.about-link:after        { content: 'ABOUT'; }
+    a.contact-link:after      { content: 'CONTACT'; }
+    a.skills-link:after       { content: 'SKILLS'; }
+    a.achievements-link:after { content: 'ACHIEVEMENTS'; }
+    a.experience-link:after   { content: 'EXPERIENCE'; }
+    a.projects-link:after     { content: 'PROJECTS'; }
 
-    a.contact-link {
-      &:after {
-        content: 'CONTACT';
-      }
-    }
-
-    a.skills-link {
-      &:after {
-        content: 'SKILLS';
-      }
-    }
-
-    a.achievements-link {
-      &:after {
-        content: 'ACHIEVEMENTS';
-      }
-    }
-
-    a.active {
-      svg {
-        color: #00CED1;
-      }
-    }
+    a.active .nav-icon,
+    a.active svg { color: #00CED1; }
   }
 
   ul {
-    /* Move social links into flex flow and keep them toward the bottom */
     position: static;
     width: 100%;
     display: flex;
@@ -131,68 +104,141 @@
     text-align: center;
     margin: 0;
 
-    li {
+    li a {
+      padding: 7px 0;
+      display: block;
+      font-size: 15px;
+      line-height: 16px;
+      color: #8B949E;
+      &:hover { color: #00CED1; }
+    }
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MOBILE TOP-BAR  (≤ 991px)
+   Dedicated header element, completely separate from the
+   desktop sidebar — no CSS conflict possible.
+   Uses Bootstrap-style fixed-top pattern.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.mobile-topbar {
+  display: none; /* Hidden on desktop */
+}
+
+@media screen and (max-width: 991px) {
+  /* Hide desktop sidebar completely */
+  .nav-bar.desktop-sidebar {
+    display: none;
+  }
+
+  /* Show the mobile top-bar */
+  .mobile-topbar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #161B22;
+    z-index: 1040;   /* Bootstrap fixed-top z-index */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    flex-direction: row;
+    align-items: center;
+    padding: 0 8px;
+    gap: 4px;
+
+    /* ── Social icons on the right ── */
+    &__social {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      padding-left: 8px;
+
       a {
-        padding: 7px 0;
-        display: block;
-        font-size: 15px;
-        line-height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
         color: #8B949E;
+        font-size: 16px;
+        text-decoration: none;
+        border-radius: 50%;
+        transition: all 0.2s ease;
 
         &:hover {
           color: #00CED1;
+          background: rgba(0, 206, 209, 0.1);
+        }
+      }
+    }
+
+    /* ── Nav icons on the left ── */
+    &__nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex: 1;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      /* Border separating nav from social icons */
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+      padding-right: 8px;
+
+      &::-webkit-scrollbar { display: none; }
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        /* Bootstrap-style: 44px tap target */
+        min-width: 44px;
+        height: 44px;
+        font-size: 18px;
+        color: #8B949E;
+        text-decoration: none;
+        border-radius: 8px;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
+
+        &:hover {
+          color: #00CED1;
+          background: rgba(0, 206, 209, 0.08);
+        }
+
+        /* Active state – teal highlight */
+        &.active {
+          color: #00CED1;
+          background: rgba(0, 206, 209, 0.12);
         }
       }
     }
   }
 }
 
-/* Mobile: turn sidebar into a top bar */
-@media screen and (max-width: 768px) {
-  .nav-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 56px;
-    min-height: 56px;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 8px;
-  }
+/* ── Extra small phones (≤ 480px) ─────────────────────── */
+@media screen and (max-width: 480px) {
+  .mobile-topbar {
+    padding: 0 6px;
 
-  .nav-bar .logo {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+    &__social {
+      gap: 6px;
+      padding-left: 6px;
 
-  .nav-bar nav {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 56px;
-    gap: 16px;
-    padding-top: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-  }
+      a {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+      }
+    }
 
-  .nav-bar nav a {
-    line-height: 40px;
-    height: 40px;
-    font-size: 20px;
-    padding: 0 4px;
-  }
-
-  .nav-bar ul {
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    padding: 0;
-    height: 56px;
+    &__nav a {
+      min-width: 36px;
+      font-size: 16px;
+    }
   }
 }
 

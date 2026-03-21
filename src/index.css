@@ -1,23 +1,46 @@
+/* Bootstrap 5 is loaded via CDN in index.html.
+   These are portfolio-specific base overrides. */
+
+/* Keep Tailwind utilities available if used anywhere */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html { font-size: 62.5%; }
+/* ── Base typography ──────────────────────────────────── */
+html {
+  font-size: 62.5%;
+  /* Bootstrap's box-sizing is already border-box */
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
 
 body {
   margin: 0;
-  font:
-    300 11px/1.4 'Helvetica Neue',
-    sans-serif;
+  font: 300 11px/1.4 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #0D1117;
   color: #E6EDF3;
+  /* Allow vertical scroll on mobile without Bootstrap conflicts */
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-@media screen and (max-width: 768px) {
+/* ── Mobile baseline (Bootstrap xs / sm) ─────────────── */
+@media screen and (max-width: 991px) {
   html { font-size: 58%; }
   body { line-height: 1.6; }
+}
+
+@media screen and (max-width: 576px) {
+  html { font-size: 55%; }
+}
+
+/* ── Override Bootstrap container to not restrict width ── */
+/* The app uses its own .container for animations/positioning */
+.container {
+  max-width: 100% !important;
 }

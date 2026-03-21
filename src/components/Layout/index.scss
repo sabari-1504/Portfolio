@@ -1,3 +1,7 @@
+/* =========================================================
+   Layout – Bootstrap-enhanced, mobile-first
+   ========================================================= */
+
 .page {
   width: 100%;
   height: 100%;
@@ -10,9 +14,7 @@
 }
 
 .tags {
-  // color: #ffd700;
-  // color: #ff4500; // red
-  color: #00CED1; // teal
+  color: #00CED1;
   opacity: 0.9;
   position: absolute;
   bottom: 0;
@@ -25,6 +27,7 @@
   margin-left: -20px;
 }
 
+/* ── Shared page container ──────────────────────────────── */
 .container {
   width: 100%;
   will-change: contents;
@@ -40,11 +43,13 @@
   animation-delay: 1s;
 }
 
+/* ── Inner text-zone for content pages ──────────────────── */
 .container.contact-page,
 .container.about-page,
 .container.skills-page,
 .container.experience-page,
-.container.projects-page {
+.container.projects-page,
+.container.achievements-page {
   .text-zone {
     position: absolute;
     left: 10%;
@@ -99,84 +104,32 @@
       max-width: fit-content;
       animation: pulse 1s;
 
-      &:nth-of-type(1) {
-        animation-delay: 1.1s;
-      }
-
-      &:nth-of-type(2) {
-        animation-delay: 1.2s;
-      }
-
-      &:nth-of-type(3) {
-        animation-delay: 1.3s;
-      }
+      &:nth-of-type(1) { animation-delay: 1.1s; }
+      &:nth-of-type(2) { animation-delay: 1.2s; }
+      &:nth-of-type(3) { animation-delay: 1.3s; }
     }
   }
 
   .text-animate-hover {
-    &:hover {
-      color: #00CED1;
-    }
+    &:hover { color: #00CED1; }
   }
 }
 
-@media screen and (max-width: 768px) {
-  .page {
-    padding-top: 56px;
-    /* space for top bar */
-  }
-
-  .tags {
-    display: none;
-  }
-
-  .container {
-    position: relative;
-    top: auto;
-    height: auto;
-    min-height: auto;
-  }
-
-  .container.contact-page,
-  .container.about-page,
-  .container.skills-page,
-  .container.experience-page,
-  .container.projects-page {
-    .text-zone {
-      position: relative;
-      left: auto;
-      top: auto;
-      transform: none;
-      width: 100%;
-      max-width: 100%;
-      padding: 0 16px;
-
-      h1 {
-        font-size: 36px;
-        line-height: 1.2;
-        left: 0;
-      }
-    }
-  }
-}
-
+/* ── Starfield background ───────────────────────────────── */
 // n is number of stars required
 @function multiple-box-shadow($n) {
   $value: '#{random(2000)}px #{random(2000)}px #FFF';
-
   @for $i from 2 through $n {
     $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
   }
-
   @return unquote($value);
 }
 
-$shadows-small: multiple-box-shadow(1400);
+$shadows-small:  multiple-box-shadow(1400);
 $shadows-medium: multiple-box-shadow(400);
-$shadows-big: multiple-box-shadow(200);
+$shadows-big:    multiple-box-shadow(200);
 
-html,
-body {
+html, body {
   height: 100%;
   height: 100vh;
   margin: 0;
@@ -192,65 +145,145 @@ body {
 }
 
 #stars {
-  width: 1px;
-  height: 1px;
+  width: 1px; height: 1px;
   background: transparent;
   box-shadow: $shadows-small;
   animation: animStar 50s linear infinite;
-
   &:after {
-    content: ' ';
-    position: absolute;
-    top: 2000px;
-    width: 1px;
-    height: 1px;
+    content: ' '; position: absolute;
+    top: 2000px; width: 1px; height: 1px;
     background: transparent;
     box-shadow: $shadows-small;
   }
 }
 
 #stars2 {
-  width: 2px;
-  height: 2px;
+  width: 2px; height: 2px;
   background: transparent;
   box-shadow: $shadows-medium;
   animation: animStar 100s linear infinite;
-
   &:after {
-    content: ' ';
-    position: absolute;
-    top: 2000px;
-    width: 2px;
-    height: 2px;
+    content: ' '; position: absolute;
+    top: 2000px; width: 2px; height: 2px;
     background: transparent;
     box-shadow: $shadows-medium;
   }
 }
 
 #stars3 {
-  width: 3px;
-  height: 3px;
+  width: 3px; height: 3px;
   background: transparent;
   box-shadow: $shadows-big;
   animation: animStar 150s linear infinite;
-
   &:after {
-    content: ' ';
-    position: absolute;
-    top: 2000px;
-    width: 3px;
-    height: 3px;
+    content: ' '; position: absolute;
+    top: 2000px; width: 3px; height: 3px;
     background: transparent;
     box-shadow: $shadows-big;
   }
 }
 
 @keyframes animStar {
-  from {
-    transform: translateY(0px);
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-2000px); }
+}
+
+/* ┌─────────────────────────────────────────────────────────┐
+   │  BOOTSTRAP MOBILE BREAKPOINTS                          │
+   │  xs  < 576px   (phones)                                │
+   │  sm  ≥ 576px   (large phones / small tablets)          │
+   │  md  ≥ 768px   (tablets)                               │
+   └─────────────────────────────────────────────────────────┘ */
+
+/* ── ≤ 991px  (md + below — tablet & phone) ──────────────── */
+@media screen and (max-width: 991px) {
+  html, body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
   }
 
-  to {
-    transform: translateY(-2000px);
+  .App {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .page {
+    padding-top: 64px;   /* space below fixed top-bar */
+    overflow-y: auto;
+    height: auto;
+    min-height: calc(100vh - 64px);
+  }
+
+  .tags {
+    display: none;
+  }
+
+  /* Remove absolute positioning – flow naturally */
+  .container {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: auto;
+    /* Bootstrap-style responsive padding */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* text-zone becomes full-width block */
+  .container.contact-page,
+  .container.about-page,
+  .container.skills-page,
+  .container.experience-page,
+  .container.projects-page,
+  .container.achievements-page {
+    .text-zone {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      width: 100%;
+      max-width: 100%;
+      padding: 24px 8px 8px 8px;
+
+      h1 {
+        font-size: 40px;
+        line-height: 1.2;
+        left: 0;
+        margin-bottom: 24px;
+      }
+
+      p {
+        font-size: 15px;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+/* ── ≤ 576px  (phones — Bootstrap xs) ───────────────────── */
+@media screen and (max-width: 576px) {
+  .page {
+    padding-top: 60px;
+  }
+
+  .container.contact-page,
+  .container.about-page,
+  .container.skills-page,
+  .container.experience-page,
+  .container.projects-page,
+  .container.achievements-page {
+    .text-zone {
+      padding: 20px 4px 4px 4px;
+
+      h1 {
+        font-size: 32px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
   }
 }
